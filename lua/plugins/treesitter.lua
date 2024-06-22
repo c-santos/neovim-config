@@ -13,7 +13,8 @@ return {
                 "html",
                 "css",
                 "tsx",
-                "typescript"
+                "typescript",
+                "json",
             },
         highlight = { enable = true },
         indent = { enable = true },
