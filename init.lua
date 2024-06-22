@@ -1,17 +1,10 @@
 vim.cmd("set relativenumber")
-vim.cmd("set clipboard+=unnamedplus")
+
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")
 
-vim.cmd.colorscheme("habamax")
-vim.cmd([[
-	highlight Normal guibg=none
-	highlight NonText guibg=none
-	highlight Normal ctermbg=none
-	highlight NonText ctermbg=none
-]])
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
@@ -34,7 +27,7 @@ local plugins = {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 }
 
 local opts = {}
@@ -51,7 +44,17 @@ require 'nvim-treesitter.install'.prefer_git = false
 local config = require("nvim-treesitter.configs")
 
 config.setup({
-    ensure_installed = { "lua", "javascript", "typescript", "python", "html", "css", "tsx", "jsx", "typescript" },
+    ensure_installed = { "lua", "javascript", "typescript", "python", "html", "css", "tsx", "typescript" },
     highlight = { enable = true },
     indent = { enable = true },
 })
+
+vim.cmd.colorscheme("habamax")
+
+vim.cmd([[
+	highlight Normal guibg=none
+	highlight NonText guibg=none
+	highlight Normal ctermbg=none
+	highlight NonText ctermbg=none
+]])
+
