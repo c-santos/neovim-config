@@ -1,12 +1,13 @@
+local noremap = function (mode, keys, cmd)
+   vim.keymap.set(mode, keys, cmd) 
+end
+
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
 
-
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
-vim.keymap.set("x", "<leader>p", "\"_dP")
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+noremap("n", "<leader>pv", ":Ex<CR>")
+noremap("v", "J", ":m '>+1<CR>gv=gv")
+noremap("v", "K", ":m '<-2<CR>gv=gv")
+noremap("n", "n", "nzzzv")
+noremap("n", "N", "Nzzzv")
+noremap("x", "<leader>p", "\"_dP")
+noremap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
