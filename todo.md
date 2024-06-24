@@ -1,6 +1,5 @@
 Add:
 
-1. 'jk' keymap to go to normal mode from insert mode.
 2. go to implementations
 3. keymap similar to vscode refactor button
 4. play around with harpoon
@@ -9,3 +8,8 @@ Add:
 7. line numbers in netrw
 8. fix lsp errors exceeding color column
 9. add formatter
+
+---
+Done:
+
+1. 'jk' keymap to go to normal mode from insert mode. 
