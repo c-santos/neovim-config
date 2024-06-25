@@ -26,5 +26,5 @@ noremap("x", "<leader>p", "\"_dP")
 noremap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- exit insert mode with 'jk'
-vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+noremap('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
