@@ -7,7 +7,7 @@ return {
         "folke/tokyonight.nvim",
         config = function()
             require("tokyonight").setup({
-                transparent = false,
+                transparent = true,
                 terminal_colors = true,
                 styles = {
                     comments = { italic = false },
@@ -35,7 +35,7 @@ return {
                 commentStyle = { italic = false },
                 keywordStyle = { italic = false },
                 terminalColors = true,
-                transparent = false,
+                transparent = true,
                 overrides = function(colors)
                     local theme = colors.theme
                     return {
@@ -59,9 +59,7 @@ return {
                     }
                 end,
             })
-
             Color("kanagawa-paper")
-
         end
     },
     {
