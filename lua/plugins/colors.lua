@@ -1,7 +1,3 @@
-function Color(scheme)
-    vim.cmd.colorscheme(scheme)
-end
-
 return {
     {
         "folke/tokyonight.nvim",
@@ -46,7 +42,7 @@ return {
                         -- Save a hlgroup with dark background and dimmed foreground
                         -- so that you can use it where you still want darker windows.
                         -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
-                        NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+                        NormalDark = { fg = theme.ui.fg, bg = theme.ui.bg_m3 },
 
                         -- -- Popular plugins that open floats will link to NormalFloat by default;
                         -- -- set their background accordingly if you wish to keep them dark and borderless
@@ -59,7 +55,6 @@ return {
                     }
                 end,
             })
-            Color("kanagawa-paper")
         end
     },
     {
