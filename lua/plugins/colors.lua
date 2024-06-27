@@ -30,7 +30,6 @@ return {
                 keywordStyle = { italic = false },
                 statementStyle = { bold = true },
                 terminalColors = true,
-                transparent = false
             })
         end
     },
