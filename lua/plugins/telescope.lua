@@ -15,7 +15,7 @@ return {
             local word = vim.fn.expand("<cWORD>")
             builtin.grep_string({ search = word })
         end, {})
-        -- vim.keymap.set("n", "gd", builtin.lsp_definition, {})
+        vim.keymap.set("n", "gd", builtin.lsp_definitions, {})
         vim.keymap.set("n", "gr", builtin.lsp_references, {})
         vim.keymap.set("n", "gi", builtin.lsp_implementations, {})
     end
