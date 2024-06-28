@@ -1,5 +1,5 @@
 local noremap = function (mode, keys, cmd)
-   vim.keymap.set(mode, keys, cmd) 
+   vim.keymap.set(mode, keys, cmd)
 end
 
 -- map leader
@@ -9,7 +9,7 @@ vim.g.mapleader = " "
 noremap("n", "<leader>pv", ":Ex<CR>")
 
 -- press esc after highlight no highlights 
-noremap('n', '<Esc>', ':noh<CR>')
+noremap('n', '<Esc>', ':noh<CR>', { silent = true })
 
 -- move highlighted with cursor
 noremap("v", "J", ":m '>+1<CR>gv=gv")
@@ -28,3 +28,6 @@ noremap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]
 -- exit insert mode with 'jk'
 noremap('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
+-- tab movement
+noremap('n', '<C-J>', ':wincmd j<CR>')
+noremap('n', '<C-K>', ':wincmd k<CR>')
