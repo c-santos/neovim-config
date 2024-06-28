@@ -3,6 +3,7 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' },
     config = function()
         local builtin = require("telescope.builtin")
+        local themes = require("telescope.themes")
         vim.keymap.set("n", "<C-p>", builtin.git_files, {})
         vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
         vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
@@ -14,6 +15,8 @@ return {
             local word = vim.fn.expand("<cWORD>")
             builtin.grep_string({ search = word })
         end, {})
+        -- vim.keymap.set("n", "gd", builtin.lsp_definition, {})
         vim.keymap.set("n", "gr", builtin.lsp_references, {})
+        vim.keymap.set("n", "gi", builtin.lsp_implementations, {})
     end
 }
