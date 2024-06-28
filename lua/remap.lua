@@ -29,5 +29,6 @@ noremap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]
 noremap('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
 -- tab movement
-noremap('n', '<C-J>', ':wincmd j<CR>')
-noremap('n', '<C-K>', ':wincmd k<CR>')
+noremap('n', '<C-J>', '<C-W>w')
+noremap('n', '<C-K>', '<C-W>w')
+noremap('n', '<C-t>', ':vsplit<CR>')
