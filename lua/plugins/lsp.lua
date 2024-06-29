@@ -55,9 +55,6 @@ return {
 
         })
 
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
-
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
@@ -102,14 +99,20 @@ return {
             matching = { disallow_symbol_nonprefix_matching = false }
         })
 
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
+        vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { async = true })
+
         vim.diagnostic.config({
+            virtual_text = false,
             float = {
                 focusable = false,
                 style = "minimal",
+                signs = true,
+                underline = true,
                 border = "rounded",
                 source = "always",
                 header = "",
-                prefix = "",
             }
         })
     end
