@@ -1,5 +1,4 @@
-local language_servers = { "lua_ls",
-    "tsserver",
+local language_servers = { "lua_ls", "tsserver",
     "gopls"
 }
 
@@ -101,7 +100,7 @@ return {
 
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
-        vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { async = true })
+        vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
         vim.diagnostic.config({
             virtual_text = false,
