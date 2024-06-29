@@ -1,64 +1,66 @@
-local ls = {
+local language_servers = {
     "lua_ls",
     "tsserver"
 }
 
 return {
     {
-        "williamboman/mason.nvim",
-        config = function()
-            require("mason").setup()
-        end
-    },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = ls
-            })
-        end
-    },
-    {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "williamboman/mason-lspconfig.nvim",
+            "williamboman/mason.nvim",
+            "j-hui/fidget.nvim",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/nvim-cmp",
+            "hrsh7th/cmp-nvim-lsp",
+            "saadparwaiz1/cmp_luasnip",
+            "L3MON4D3/LuaSnip",
+        },
         config = function()
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup({})
-            lspconfig.tsserver.setup({})
+            require("fidget").setup({})
+            require("mason").setup({})
+            require("mason-lspconfig").setup({
+                ensure_installed = language_servers,
+                handlers = {
+                    function (server_name)
+                        require("lspconfig")[server_name].setup {}
+                    end,
+
+                    -- custom overrides
+                    ["lua_ls"] = function ()
+                        local lspconfig = require("lspconfig")
+                        lspconfig.lua_ls.setup({
+                            settings = {
+                                Lua = {
+                                    runtime = {
+                                        version = "LuaJIT"
+                                    },
+                                    diagnostics = {
+                                        globals = { "vim", "require" }
+                                    },
+                                    workspace = {
+                                        library = vim.api.nvim_get_runtime_file("", true)
+                                    }
+                                },
+                            },
+                        })
+                    end,
+                },
+
+            })
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
 
-        end
-    },
-    {
-        "hrsh7th/cmp-vsnip",
-    },
-    {
-        "hrsh7th/vim-vsnip",
-    },
-    {
-        "hrsh7th/cmp-buffer",
-    },
-    {
-        "hrsh7th/cmp-path",
-    },
-    {
-        "hrsh7th/cmp-cmdline",
-    },
-    {
-        "hrsh7th/nvim-cmp",
-        config = function()
             local cmp = require'cmp'
 
             cmp.setup({
                 snippet = {
-                    -- REQUIRED - you must specify a snippet engine
                     expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-                        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-                        -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+                        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
                     end,
                 },
                 window = {
@@ -74,27 +76,13 @@ return {
                 }),
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
-                    { name = 'vsnip' }, -- For vsnip users.
-                    -- { name = 'luasnip' }, -- For luasnip users.
-                    -- { name = 'ultisnips' }, -- For ultisnips users.
-                    -- { name = 'snippy' }, -- For snippy users.
+                    -- { name = 'vsnip' }, -- For vsnip users.
+                    { name = 'luasnip' }, -- For luasnip users.
                 }, {
                         { name = 'buffer' },
                     })
             })
 
-            -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
-            -- Set configuration for specific filetype.
-            --[[ cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'git' },
-    }, {
-      { name = 'buffer' },
-    })
- })
- require("cmp_git").setup() ]]-- 
-
-            -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline({ '/', '?' }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
@@ -102,7 +90,6 @@ return {
                 }
             })
 
-            -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline(':', {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
@@ -112,14 +99,10 @@ return {
                     }),
                 matching = { disallow_symbol_nonprefix_matching = false }
             })
-        end
-    },
-    {
-        "hrsh7th/cmp-nvim-lsp",
-        config = function ()
+
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-            for k,v in pairs(ls) do
+            for k,v in pairs(language_servers) do
                 require("lspconfig")[v].setup {
                     capabilities = capabilities
                 }
