@@ -31,4 +31,11 @@ noremap('i', 'jk', '<Esc>', { noremap = true, silent = true })
 -- tab movement
 noremap('n', '<C-J>', '<C-W>w')
 noremap('n', '<C-K>', '<C-W>w')
+
+-- tmux pane
+noremap('n', '<c-k>', ':wincmd k<CR>')
+noremap('n', '<c-j>', ':wincmd j<CR>')
+noremap('n', '<c-h>', ':wincmd h<CR>')
+noremap('n', '<c-l>', ':wincmd l<CR>')
+
 noremap('n', '<C-t>', ':vsplit<CR>')
